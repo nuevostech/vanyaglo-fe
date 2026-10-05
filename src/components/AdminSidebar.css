@@ -1,0 +1,105 @@
+.admin-sidebar {
+  width: 232px;
+  min-height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #eeeeee;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+/* ---------------- LOGO ---------------- */
+
+.sidebar-logo {
+  height: 130px;
+  padding: 42px 28px 0;
+  box-sizing: border-box;
+}
+
+.logo-name {
+  color: #e94d62;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  line-height: 35px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  position: relative;
+  display: inline-block;
+}
+
+.logo-star {
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+.logo-subtitle {
+  color: #777777;
+  font-size: 7px;
+  letter-spacing: 1.2px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* ---------------- MENU ---------------- */
+
+.sidebar-menu {
+  margin-top: 0;
+  padding: 0 22px;
+}
+
+.sidebar-menu-item {
+  width: 100%;
+  height: 49px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #b8b8bd;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sidebar-menu-item:hover {
+  background: #fff4f5;
+  color: #e94d62;
+}
+
+.sidebar-menu-item.active {
+  background: #fdebed;
+  color: #e94d62;
+  border-left: 2px solid #e94d62;
+}
+
+.menu-icon {
+  display: none;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 180px;
+  }
+
+  .sidebar-logo {
+    padding-left: 20px;
+  }
+
+  .logo-name {
+    font-size: 30px;
+  }
+
+  .sidebar-menu {
+    padding: 0 15px;
+  }
+}

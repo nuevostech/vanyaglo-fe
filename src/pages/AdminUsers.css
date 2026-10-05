@@ -1,0 +1,765 @@
+/* =========================================
+   USERS PAGE
+========================================= */
+
+.users-page {
+  width: 100%;
+  min-height: calc(100vh - 109px);
+  background: #ffffff;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.users-header {
+  padding: 0 24px 10px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================================
+   ADD USER BUTTON
+========================================= */
+
+.add-user-btn {
+  height: 36px;
+  padding: 0 20px;
+  background: #e94d62;
+  border: 1px solid #e94d62;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-user-btn:hover {
+  background: #d94357;
+  border-color: #d94357;
+}
+.users-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d2230;
+}
+
+.users-header p {
+  margin: 7px 0 0;
+  font-size: 12px;
+  color: #333743;
+}
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.users-search-section {
+  padding: 20px 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.users-search {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.users-search input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 50px 0 21px;
+  font-size: 12px;
+  color: #333333;
+  background: transparent;
+}
+
+.users-search input::placeholder {
+  color: #555555;
+}
+
+.search-icon {
+  position: absolute;
+  right: 18px;
+  font-size: 27px;
+  line-height: 1;
+  color: #ed4d62;
+  transform: rotate(-20deg);
+}
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.users-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  padding: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.users-stat-card {
+  height: 88px;
+  background: #fff9fa;
+  border: 1px solid #ffd9de;
+  border-radius: 6px;
+  padding: 19px;
+}
+
+.users-stat-number {
+  font-size: 25px;
+  line-height: 28px;
+  color: #171b2b;
+  font-weight: 500;
+}
+
+.users-stat-label {
+  margin-top: 7px;
+  font-size: 11px;
+  color: #333743;
+}
+
+/* =========================================
+   TABLE SECTION
+========================================= */
+
+.users-table-section {
+  padding: 20px;
+}
+
+.users-table-wrapper {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  overflow-x: auto;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+.users-table thead {
+  background: #fff9fa;
+}
+
+.users-table th {
+  height: 48px;
+  padding: 0 15px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555b66;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.users-table td {
+  height: 70px;
+  padding: 10px 15px;
+  font-size: 12px;
+  color: #333333;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.users-table tbody tr:hover {
+  background: #fffafb;
+}
+
+/* =========================================
+   USER
+========================================= */
+
+.table-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.table-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background: #fff3f5;
+  color: #e94d62;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.table-user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.table-email,
+.table-phone {
+  color: #666666;
+  white-space: nowrap;
+}
+
+/* =========================================
+   ROLE
+========================================= */
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  background: #f1ebff;
+  color: #7650c9;
+}
+
+.role-badge.customer {
+  background: #fff0e6;
+  color: #ff7927;
+}
+
+.role-badge.reseller {
+  background: #ffeff1;
+  color: #e94d62;
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 65px;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  background: #e3f8f4;
+  color: #0bb7a4;
+}
+
+.status-badge.inactive {
+  background: #f2f2f2;
+  color: #777777;
+}
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-action-btn {
+  height: 30px;
+  min-width: 62px;
+  padding: 0 12px;
+  background: #ffffff;
+  border: 1px solid #ff9da9;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-btn {
+  color: #4b4141;
+}
+
+.edit-btn {
+  color: #4b4141;
+}
+
+.table-action-btn:hover {
+  background: #fff3f5;
+  border-color: #e94d62;
+  color: #e94d62;
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.no-users {
+  height: 100px !important;
+  text-align: center !important;
+  color: #888888 !important;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .users-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .users-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .users-search-section,
+  .users-table-section {
+    padding: 15px;
+  }
+
+}
+.users-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding-right: 0;
+}
+
+.pagination-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pagination-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-page {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: #ed4f68;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* ============================================================
+   VIEW / EDIT MODAL
+============================================================ */
+
+.user-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   MODAL BOX
+============================================================ */
+
+.user-modal {
+  width: 100%;
+  max-width: 520px;
+
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2);
+
+  animation: userModalOpen 0.2s ease-out;
+}
+
+
+/* ============================================================
+   MODAL HEADER
+============================================================ */
+
+.user-modal-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 22px 24px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+.user-modal-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  color: #171717;
+}
+
+
+.user-modal-header p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  color: #777777;
+}
+
+
+/* ============================================================
+   CLOSE BUTTON
+============================================================ */
+
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f7f7f7;
+
+  color: #555555;
+
+  font-size: 24px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s;
+}
+
+
+.modal-close-btn:hover {
+  background: #f1f1f1;
+
+  color: #ef4560;
+}
+
+
+/* ============================================================
+   USER DETAILS
+============================================================ */
+
+.user-details {
+  padding: 24px;
+}
+
+
+.user-detail-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+.user-detail-row:last-child {
+  border-bottom: none;
+}
+
+
+.user-detail-row span {
+  color: #777777;
+
+  font-size: 14px;
+}
+
+
+.user-detail-row strong {
+  color: #222222;
+
+  font-size: 14px;
+
+  text-align: right;
+
+  word-break: break-word;
+}
+
+
+/* ============================================================
+   LOADING
+============================================================ */
+
+.modal-loading {
+  padding: 45px 20px;
+
+  text-align: center;
+
+  color: #777777;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   EDIT FORM
+============================================================ */
+
+.edit-user-form {
+  padding: 24px;
+}
+
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  color: #333333;
+}
+
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  height: 44px;
+
+  padding: 0 12px;
+
+  border: 1px solid #dddddd;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #222222;
+
+  font-size: 14px;
+
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ef4560;
+
+  box-shadow: 0 0 0 2px rgba(239, 69, 96, 0.08);
+}
+
+
+/* ============================================================
+   EDIT BUTTONS
+============================================================ */
+
+.edit-user-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 25px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+
+.cancel-btn,
+.save-user-btn {
+  min-width: 110px;
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+
+.cancel-btn {
+  background: #ffffff;
+
+  border: 1px solid #dddddd;
+
+  color: #555555;
+}
+
+
+.cancel-btn:hover {
+  background: #f7f7f7;
+}
+
+
+.save-user-btn {
+  background: #ef4560;
+
+  border: 1px solid #ef4560;
+
+  color: #ffffff;
+}
+
+
+.save-user-btn:hover {
+  background: #df3853;
+}
+
+
+.save-user-btn:disabled,
+.cancel-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   MODAL ANIMATION
+============================================================ */
+
+@keyframes userModalOpen {
+  from {
+    opacity: 0;
+
+    transform: translateY(-15px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .user-modal-overlay {
+    padding: 12px;
+  }
+
+  .user-modal {
+    max-width: 100%;
+
+    max-height: 92vh;
+
+    border-radius: 12px;
+  }
+
+  .user-modal-header {
+    padding: 18px;
+  }
+
+  .user-details,
+  .edit-user-form {
+    padding: 18px;
+  }
+
+  .user-detail-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  .user-detail-row strong {
+    text-align: left;
+  }
+
+  .edit-user-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .save-user-btn {
+    width: 100%;
+  }
+}

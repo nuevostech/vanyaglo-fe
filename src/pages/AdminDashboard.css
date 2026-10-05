@@ -1,0 +1,647 @@
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.admin-layout {
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #202331;
+}
+
+.admin-main {
+  margin-left: 232px;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dashboard-header {
+  height: 109px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  color: #171b2b;
+}
+
+.dashboard-header p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  color: #343846;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 25px;
+  color: #222222;
+  font-weight: 300;
+}
+
+/* =====================================================
+   DASHBOARD CONTENT
+===================================================== */
+
+.dashboard-content {
+  width: 100%;
+}
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats-section {
+  padding: 24px 24px 22px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 29px;
+  border-bottom: 1px solid #eeeeee;
+  box-sizing: border-box;
+}
+
+.stat-card {
+  height: 98px;
+  border: 1px solid #ffd8dd;
+  background: #fff9fa;
+  border-radius: 6px;
+  padding: 22px 20px;
+  box-sizing: border-box;
+}
+
+.stat-value {
+  font-size: 27px;
+  line-height: 30px;
+  color: #171b2b;
+  font-weight: 500;
+}
+
+.stat-label {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #303440;
+}
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions-section {
+  padding: 25px 24px 23px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.quick-actions-section h2,
+.recent-users-section h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #292e3d;
+  margin: 0 0 17px;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.quick-action-btn {
+  width: 160px;
+  height: 36px;
+  background: #ffffff;
+  border: 1px solid #ff9ca8;
+  border-radius: 6px;
+  color: #443a3a;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.quick-action-btn:hover {
+  background: #fff4f5;
+  border-color: #e94d62;
+  color: #e94d62;
+}
+
+/* =====================================================
+   RECENT USERS
+===================================================== */
+
+.recent-users-section {
+  padding: 26px 24px;
+}
+
+.recent-users-section h2 {
+  margin-bottom: 16px;
+}
+
+.recent-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* =====================================================
+   USER CARD
+===================================================== */
+
+.recent-user-card {
+  min-height: 109px;
+  border: 1px solid #e7e7e7;
+  border-radius: 7px;
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.user-avatar {
+  width: 39px;
+  height: 39px;
+  background: #fff4f5;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e94d62;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.user-information {
+  margin-left: 18px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 2px;
+}
+
+.user-email {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #777777;
+}
+
+.user-badges {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.status-badge,
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 11px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.status-badge {
+  background: #e4f8f5;
+  color: #0bb9a4;
+}
+
+.role-badge.customer {
+  background: #fff0e6;
+  color: #ff7927;
+}
+
+.role-badge.reseller {
+  background: #ffeff1;
+  color: #e94d62;
+}
+
+/* =====================================================
+   PLACEHOLDER PAGES
+===================================================== */
+
+.placeholder-page {
+  padding: 35px 24px;
+}
+
+.placeholder-page h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.placeholder-page p {
+  color: #777777;
+  font-size: 14px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .stats-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .admin-sidebar {
+    width: 180px;
+  }
+
+  .admin-main {
+    margin-left: 180px;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 550px) {
+
+  .admin-sidebar {
+    width: 70px;
+  }
+
+  .admin-main {
+    margin-left: 70px;
+  }
+
+  .sidebar-logo {
+    padding-left: 10px;
+  }
+
+  .logo-name {
+    font-size: 18px;
+  }
+
+  .logo-subtitle {
+    display: none;
+  }
+
+  .sidebar-menu-item {
+    font-size: 0;
+  }
+
+  .stats-section {
+    padding: 15px;
+  }
+
+  .quick-actions-section,
+  .recent-users-section {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}
+/* =========================================
+   ADD USER MODAL
+========================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.add-user-modal {
+  width: 500px;
+  max-width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #202331;
+}
+
+.modal-header p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #777777;
+}
+
+.modal-close-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #777777;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-close-btn:hover {
+  background: #fff2f4;
+  color: #e94d62;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.add-user-form {
+  padding: 22px 24px 24px;
+}
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background: #ffffff;
+  outline: none;
+  font-size: 12px;
+  color: #333333;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #e94d62;
+}
+
+.form-group input::placeholder {
+  color: #999999;
+}
+
+/* =========================================
+   MODAL BUTTONS
+========================================= */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #eeeeee;
+}
+
+.modal-cancel-btn,
+.modal-create-btn {
+  height: 37px;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-cancel-btn {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  color: #555555;
+}
+
+.modal-cancel-btn:hover {
+  background: #f7f7f7;
+}
+
+.modal-create-btn {
+  background: #e94d62;
+  border: 1px solid #e94d62;
+  color: #ffffff;
+}
+
+.modal-create-btn:hover {
+  background: #d94357;
+  border-color: #d94357;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .modal-overlay {
+    padding: 15px;
+  }
+
+  .add-user-modal {
+    width: 100%;
+  }
+
+  .modal-header {
+    padding: 18px;
+  }
+
+  .add-user-form {
+    padding: 18px;
+  }
+
+}
+/* =========================================
+   ADD PRODUCT MODAL
+========================================= */
+
+.add-product-modal {
+  width: 560px;
+  max-width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+.add-product-form {
+  padding: 22px 24px 24px;
+}
+
+/* =========================================
+   FORM ROW
+========================================= */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* =========================================
+   PRODUCT INPUTS
+========================================= */
+
+.add-product-form .form-group {
+  margin-bottom: 17px;
+}
+
+.add-product-form .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.add-product-form .form-group input,
+.add-product-form .form-group select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background: #ffffff;
+  outline: none;
+  font-size: 12px;
+  color: #333333;
+  font-family: inherit;
+}
+
+.add-product-form .form-group input:focus,
+.add-product-form .form-group select:focus {
+  border-color: #e94d62;
+}
+
+.add-product-form .form-group input::placeholder {
+  color: #999999;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .add-product-modal {
+    width: 100%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .add-product-form {
+    padding: 18px;
+  }
+
+}
+/* =========================================
+   PASSWORD INPUT
+========================================= */
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  height: 40px;
+  padding: 0 45px 0 12px !important;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background: #ffffff;
+  outline: none;
+  font-size: 12px;
+  color: #333333;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.password-input-wrapper input:focus {
+  border-color: #e94d62;
+}
+
+.password-input-wrapper input::placeholder {
+  color: #999999;
+}
+
+/* =========================================
+   PASSWORD EYE BUTTON
+========================================= */
+
+.password-toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #777777;
+
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.password-toggle-btn:hover {
+  color: #e94d62;
+  background: #fff3f5;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+}
