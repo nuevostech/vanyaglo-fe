@@ -103,3 +103,37 @@
     padding: 0 15px;
   }
 }
+/* ---------------- LOGOUT ---------------- */
+
+.sidebar-logout {
+  position: absolute;
+  bottom: 24px;
+  left: 22px;
+  right: 22px;
+}
+
+.sidebar-logout-btn {
+  width: 100%;
+  height: 49px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #b8b8bd;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sidebar-logout-btn:hover {
+  background: #fff4f5;
+  color: #e94d62;
+}
+
+.logout-icon {
+  font-size: 18px;
+}

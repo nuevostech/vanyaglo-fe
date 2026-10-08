@@ -6,6 +6,7 @@
   width: 100%;
   min-height: calc(100vh - 109px);
   background: #ffffff;
+   padding-top: 25px;
 }
 
 /* =========================================
@@ -13,7 +14,7 @@
 ========================================= */
 .products-header {
   padding: 0 24px 10px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,12 +85,12 @@
 
 .products-search-section {
   padding: 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
 }
 
 .products-search {
-  width: 100%;
-  height: 45px;
+  width: 40%;
+  height: 38px;
   border: 1px solid #dedede;
   border-radius: 8px;
   display: flex;
@@ -129,7 +130,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 9px;
   padding: 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
 }
 
 .products-stat-card {
@@ -261,9 +262,13 @@
   font-weight: 600;
 }
 
-/* =========================================
-   STATUS
-========================================= */
+.stock-low,
+.stock-out {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #fff1f2;
+}
 
 .product-status {
   display: inline-flex;
@@ -293,7 +298,7 @@
 
 .product-actions {
   display: flex;
-  gap: 7px;
+  gap: 10px;
 }
 
 .product-action-btn {
@@ -407,4 +412,629 @@
 .import-product-btn:hover {
   background: #d94357;
   border-color: #d94357;
+}
+/* ============================================================
+   VIEW PRODUCT MODAL
+============================================================ */
+.view-product-modal {
+  width: 1000px;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.view-product-modal .modal-header {
+  padding: 20px 22px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.view-product-modal .modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.view-product-modal .modal-header p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #888888;
+}
+
+.view-product-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-height: 70vh;
+  padding: 0;
+  overflow-y: auto;
+}
+.view-product-half {
+  padding: 20px;
+  min-width: 0;
+}
+
+.view-product-half:first-child {
+  border-right: 1px solid #eeeeee;
+}
+
+.view-product-image-section {
+  padding-top: 14px;
+}
+
+.view-product-image-section .view-product-label {
+  margin-bottom: 12px;
+}
+
+.view-product-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.view-product-row:last-child {
+  border-bottom: none;
+}
+
+.view-product-label {
+  min-width: 140px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.view-product-value {
+  flex: 1;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+  word-break: break-word;
+}
+
+.view-product-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.view-product-status.active {
+  background: #eaf8ef;
+  color: #26934b;
+}
+
+.view-product-status.inactive {
+  background: #fcebed;
+  color: #d94b5c;
+}
+.view-product-description {
+  text-align: right;
+  line-height: 1.5;
+  max-width: 300px;
+}
+.view-product-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.view-product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  background: #f7f7f7;
+}
+
+.product-image-url-fields {
+  display: grid;
+  gap: 8px;
+}
+
+.product-image-url-row {
+  display: flex;
+  gap: 8px;
+}
+
+.product-image-url-row input {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: #222222;
+  font-size: 13px;
+  outline: none;
+}
+
+.product-image-url-row input:focus {
+  border-color: #ed4d62;
+  box-shadow: 0 0 0 2px rgba(237, 77, 98, 0.08);
+}
+
+.product-image-add-btn,
+.product-image-remove-btn {
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.product-image-add-btn {
+  margin-top: 8px;
+  padding: 9px 14px;
+  background: #ed4d62;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.product-image-remove-btn {
+  width: 40px;
+  flex: 0 0 40px;
+  background: #f1f1f1;
+  color: #d94b5c;
+  font-size: 22px;
+}
+
+.product-image-preview-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  max-height: 360px;
+  margin-top: 10px;
+  padding-right: 5px;
+  overflow-y: auto;
+  scrollbar-color: #d9a9af transparent;
+  scrollbar-width: thin;
+}
+
+.product-image-preview-list::-webkit-scrollbar {
+  width: 7px;
+}
+
+.product-image-preview-list::-webkit-scrollbar-thumb {
+  background: #d9a9af;
+  border-radius: 10px;
+}
+
+.product-image-preview {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.product-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+}
+
+.product-image-error {
+  display: block;
+  margin-top: 6px;
+  color: #c63c4c;
+  font-size: 11px;
+  text-align: left;
+}
+
+.product-image-preview button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: #ed4d62;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.view-product-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 22px 22px;
+}
+.view-product-close-btn {
+  width: 120px;
+  height: 38px;
+  border: none;
+  border-radius: 7px;
+  background: #ed4d62;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-product-close-btn:hover {
+  background: #d94055;
+}
+/* ================================
+   EDIT PRODUCT MODAL
+================================ */
+.edit-product-modal {
+  width: 1000px;
+  max-width: 1000px;
+  height: 90vh;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-product-modal .modal-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-product-modal .modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.edit-product-modal .modal-header p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #888888;
+}
+
+.edit-product-content {
+  padding: 16px 18px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.edit-product-field {
+  margin-bottom: 14px;
+}
+
+.edit-product-field:last-child {
+  margin-bottom: 0;
+}
+
+.edit-product-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555555;
+}
+
+.edit-product-field input,
+.edit-product-field textarea,
+.edit-product-field select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  padding: 11px 12px;
+  background: #ffffff;
+  color: #222222;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.edit-product-field input:focus,
+.edit-product-field textarea:focus,
+.edit-product-field select:focus {
+  border-color: #ed4d62;
+  box-shadow: 0 0 0 2px rgba(237, 77, 98, 0.08);
+}
+
+.edit-product-field textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+.edit-product-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: #ffffff;
+  border-top: 1px solid #eeeeee;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+}
+.edit-product-cancel-btn,
+.edit-product-save-btn {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-product-cancel-btn {
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #555555;
+}
+
+.edit-product-cancel-btn:hover {
+  background: #f7f7f7;
+}
+
+.edit-product-save-btn {
+  border: none;
+  background: #ed4d62;
+  color: #ffffff;
+}
+
+.edit-product-save-btn:hover {
+  background: #d94055;
+}
+
+.edit-product-cancel-btn:disabled,
+.edit-product-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* ============================================================
+   EXCEL IMPORT MODAL
+============================================================ */
+
+.excel-import-modal {
+  width: 95%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.excel-import-content {
+  padding: 20px;
+  max-height: calc(90vh - 90px);
+  overflow-y: auto;
+}
+
+.excel-import-file-info {
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #fafafa;
+}
+
+.excel-import-file-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.excel-import-file-name {
+  font-size: 14px;
+  color: #555555;
+  word-break: break-word;
+}
+
+.excel-import-file-size {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #888888;
+}
+
+.excel-preview-section {
+  margin-bottom: 20px;
+}
+
+.excel-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.excel-preview-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.excel-preview-description {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #777777;
+}
+
+.excel-product-count {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #fff1f3;
+  color: #ed4d62;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.excel-preview-table-wrapper {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 360px;
+}
+
+.excel-preview-table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.excel-preview-table thead {
+  background: #f7f7f7;
+}
+
+.excel-preview-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f7f7f7;
+  padding: 10px 12px;
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555555;
+}
+
+.excel-preview-table td {
+  padding: 10px 12px;
+  color: #444444;
+  border-bottom: 1px solid #eeeeee;
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.excel-preview-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.excel-preview-table tbody tr:hover {
+  background: #fffafb;
+}
+
+.excel-delete-btn {
+  border: 1px solid #ed4d62;
+  background: #ffffff;
+  color: #ed4d62;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.excel-delete-btn:hover {
+  background: #ed4d62;
+  color: #ffffff;
+}
+
+.excel-delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.excel-import-confirmation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 18px;
+  cursor: pointer;
+}
+
+.excel-import-confirmation.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.excel-import-submit-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #ed4d62;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.excel-import-submit-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.excel-import-empty {
+  padding: 20px;
+  margin-bottom: 18px;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  text-align: center;
+  color: #777777;
+  background: #fafafa;
+}
+
+@media (max-width: 700px) {
+  .excel-import-modal {
+    width: calc(100vw - 20px);
+    max-height: 94vh;
+  }
+
+  .excel-import-content {
+    padding: 15px;
+  }
+
+  .excel-preview-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .excel-preview-table-wrapper {
+    max-height: 300px;
+  }
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.modal-header-title {
+  flex: 1;
+}
+
+.selected-file-top {
+  min-width: 210px;
+  max-width: 240px;
+  margin-left: auto;
+}
+
+.modal-close-btn {
+  flex-shrink: 0;
+  margin-left: 4px;
 }

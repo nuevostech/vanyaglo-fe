@@ -17,6 +17,29 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
     },
   ];
 
+  const handleLogout = () => {
+    const confirmLogout = window.confirm(
+      "Are you sure you want to logout?"
+    );
+
+    if (!confirmLogout) {
+      return;
+    }
+
+    // Clear admin authentication
+    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("username");
+
+    // Redirect to Flutter Login
+    window.location.href = "http://localhost:5000";
+  };
+
   return (
     <aside className="admin-sidebar">
 
@@ -34,7 +57,6 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
 
       {/* Menu */}
       <nav className="sidebar-menu">
-
         {menuItems.map((item) => (
           <button
             key={item.name}
@@ -50,8 +72,19 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
             <span>{item.name}</span>
           </button>
         ))}
-
       </nav>
+
+      {/* Logout */}
+      <div className="sidebar-logout">
+        <button
+          type="button"
+          className="sidebar-logout-btn"
+          onClick={handleLogout}
+        >
+          
+          <span>Logout</span>
+        </button>
+      </div>
 
     </aside>
   );

@@ -134,12 +134,12 @@ const AdminUsers = ({ onAddUser }) => {
           user.phone ||
           "-",
 
-        role:
-          user.role?.name ||
-          user.Role?.name ||
-          user.role_name ||
-          user.role ||
-          "-",
+        // role:
+        //   user.role?.name ||
+        //   user.Role?.name ||
+        //   user.role_name ||
+        //   user.role ||
+        //   "-",
 
         status:
           user.status ||
@@ -638,7 +638,7 @@ const handleUpdate = async () => {
           </div>
 
           <div className="users-stat-label">
-            New
+            New (Today)
           </div>
         </div>
 
@@ -669,7 +669,7 @@ const handleUpdate = async () => {
                 <th>User</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Role</th>
+                {/* <th>Role</th> */}
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -739,7 +739,7 @@ const handleUpdate = async () => {
 
                     {/* ROLE */}
 
-                    <td>
+                    {/* <td>
                       <span
                         className={`role-badge ${String(
                           user.role
@@ -747,7 +747,7 @@ const handleUpdate = async () => {
                       >
                         {user.role}
                       </span>
-                    </td>
+                    </td> */}
 
                     {/* STATUS */}
 
@@ -958,7 +958,7 @@ const handleUpdate = async () => {
                   </strong>
                 </div>
 
-                <div className="user-detail-row">
+                {/* <div className="user-detail-row">
                   <span>
                     Role
                   </span>
@@ -970,7 +970,7 @@ const handleUpdate = async () => {
                       selectedUser.role ||
                       "-"}
                   </strong>
-                </div>
+                </div> */}
 
                 <div className="user-detail-row">
                   <span>
