@@ -21,7 +21,7 @@
 
 .dashboard-header {
   height: 109px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -644,4 +644,43 @@
 
 .password-toggle-btn:focus {
   outline: none;
+}
+/* =========================================
+   RECENT USERS PAGINATION
+========================================= */
+
+.recent-users-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.recent-users-pagination-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.recent-users-pagination-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.recent-users-pagination-page {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: #ed4f68;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
 }

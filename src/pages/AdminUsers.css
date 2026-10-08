@@ -6,6 +6,7 @@
   width: 100%;
   min-height: calc(100vh - 109px);
   background: #ffffff;
+  padding-top: 25px;
 }
 
 /* =========================================
@@ -13,7 +14,7 @@
 ========================================= */
 .users-header {
   padding: 0 24px 10px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,11 +60,11 @@
 
 .users-search-section {
   padding: 20px 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
 }
 
 .users-search {
-  width: 100%;
+  width: 40%;
   height: 45px;
   border: 1px solid #dedede;
   border-radius: 8px;
@@ -105,7 +106,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 9px;
   padding: 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: none;
 }
 
 .users-stat-card {
