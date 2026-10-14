@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./AdminSidebar.css";
 
@@ -14,6 +15,10 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
     {
       name: "Products",
       icon: "▣",
+    },
+    {
+      name: "Ratings & Reviews",
+      icon: "☆",
     },
   ];
 
@@ -36,13 +41,12 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
     localStorage.removeItem("user_name");
     localStorage.removeItem("username");
 
-    // Redirect to Flutter Login
+    // Redirect to existing login page
     window.location.href = "http://localhost:5000";
   };
 
   return (
     <aside className="admin-sidebar">
-
       {/* Logo */}
       <div className="sidebar-logo">
         <div className="logo-name">
@@ -60,6 +64,7 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
         {menuItems.map((item) => (
           <button
             key={item.name}
+            type="button"
             className={`sidebar-menu-item ${
               activeMenu === item.name ? "active" : ""
             }`}
@@ -81,11 +86,9 @@ const AdminSidebar = ({ activeMenu, setActiveMenu }) => {
           className="sidebar-logout-btn"
           onClick={handleLogout}
         >
-          
           <span>Logout</span>
         </button>
       </div>
-
     </aside>
   );
 };

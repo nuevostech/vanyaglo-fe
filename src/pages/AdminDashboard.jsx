@@ -4,7 +4,7 @@ import AdminUsers from "./AdminUsers";
 import AdminProducts from "./AdminProducts";
 import "./AdminDashboard.css";
 import { Eye, EyeOff } from "lucide-react";
-
+import ProductReviews from "./ProductReviews";
 const AdminDashboard = () => {
   const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [showAddUserModal, setShowAddUserModal] = useState(false);
@@ -77,6 +77,7 @@ const [addProductForm, setAddProductForm] = useState({
   orders: "00",
   totalUsers: "00",
   products: "00",
+  totalReviews: "00",
 });
 
 const [recentUsers, setRecentUsers] = useState([]);
@@ -108,6 +109,11 @@ const stats = [
   {
     value: dashboardStats.products,
     label: "Products",
+  },
+  {
+    value: dashboardStats.totalReviews,
+    label: "Ratings & Reviews",
+    onClick: () => setActiveMenu("Ratings & Reviews"),
   },
 ];
 const fetchDashboardUsers = async () => {
@@ -211,6 +217,43 @@ setRecentUsersPage(1);
     );
   }
 };
+const fetchDashboardReviews = async () => {
+  try {
+    const token =
+      localStorage.getItem("token") ||
+      localStorage.getItem("accessToken") ||
+      localStorage.getItem("access_token") ||
+      localStorage.getItem("auth_token");
+
+    if (!token) return;
+
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/admin/reviews?page=1&limit=1`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "Failed to fetch review count");
+    }
+
+    const total = result.data?.pagination?.total ?? 0;
+
+    setDashboardStats((previous) => ({
+      ...previous,
+      totalReviews: String(total).padStart(2, "0"),
+    }));
+  } catch (error) {
+    console.error("Dashboard reviews error:", error);
+  }
+};
 const fetchDashboardProducts = async () => {
   try {
     const token =
@@ -259,6 +302,7 @@ const fetchDashboardProducts = async () => {
 useEffect(() => {
   fetchDashboardUsers();
   fetchDashboardProducts();
+  fetchDashboardReviews();
 }, []);
   const handleAddUser = () => {
     setActiveMenu("Users");
@@ -437,24 +481,33 @@ const handleCreateProduct = async (e) => {
           <div className="dashboard-content">
 
             {/* Statistics */}
-            <section className="stats-section">
+            
+<section className="stats-section">
+  {stats.map((stat) => (
+    <div
+      className={`stat-card ${
+        stat.onClick ? "stat-card-clickable" : ""
+      }`}
+      key={stat.label}
+      onClick={stat.onClick}
+      role={stat.onClick ? "button" : undefined}
+      tabIndex={stat.onClick ? 0 : undefined}
+      onKeyDown={(event) => {
+        if (
+          stat.onClick &&
+          (event.key === "Enter" || event.key === " ")
+        ) {
+          event.preventDefault();
+          stat.onClick();
+        }
+      }}
+    >
+      <div className="stat-value">{stat.value}</div>
+      <div className="stat-label">{stat.label}</div>
+    </div>
+  ))}
+</section>
 
-              {stats.map((stat) => (
-                <div
-                  className="stat-card"
-                  key={stat.label}
-                >
-                  <div className="stat-value">
-                    {stat.value}
-                  </div>
-
-                  <div className="stat-label">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-
-            </section>
 
             {/* Quick Actions */}
             {/* <section className="quick-actions-section">
@@ -581,6 +634,9 @@ const handleCreateProduct = async (e) => {
   <AdminProducts
     onAddProduct={() => setShowAddProductModal(true)}
   />
+)}
+{activeMenu === "Ratings & Reviews" && (
+  <ProductReviews />
 )}
 
       </main>
