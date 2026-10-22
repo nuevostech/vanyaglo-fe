@@ -751,15 +751,23 @@ const handleUpdate = async () => {
 
                     {/* STATUS */}
 
-                    <td>
-                      <span
-                        className={`status-badge ${String(
-                          user.status
-                        ).toLowerCase()}`}
-                      >
-                        {user.status}
-                      </span>
-                    </td>
+                    
+<td>
+  <span
+    className={`status-badge ${String(
+      user.status
+    ).toLowerCase()}`}
+  >
+    {user.status === "removed"
+      ? "Removed"
+      : user.status === "inactive"
+      ? "Inactive"
+      : user.status === "active"
+      ? "Active"
+      : user.status}
+  </span>
+</td>
+
 
                     {/* ACTIONS */}
 
@@ -779,17 +787,16 @@ const handleUpdate = async () => {
                           View
                         </button>
 
-                        <button
-                          type="button"
-                          className="table-action-btn edit-btn"
-                          onClick={() =>
-                            handleEdit(
-                              user.id
-                            )
-                          }
-                        >
-                          Edit
-                        </button>
+                        
+{user.status !== "removed" && (
+  <button
+    type="button"
+    className="table-action-btn edit-btn"
+    onClick={() => handleEdit(user.id)}
+  >
+    Edit
+  </button>
+)}
 
                       </div>
 
@@ -978,9 +985,10 @@ const handleUpdate = async () => {
                   </span>
 
                   <strong>
-                    {selectedUser.status ||
-                      "-"}
-                  </strong>
+  {selectedUser.status === "removed"
+    ? "Removed"
+    : selectedUser.status || "-"}
+</strong>
                 </div>
 
                 <div className="user-detail-row">

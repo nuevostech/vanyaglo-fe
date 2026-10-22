@@ -1,18 +1,15 @@
 /* =========================================================
    PRODUCT REVIEWS PAGE
-========================================================= */
-
+\========================================================= */
 .product-reviews-page {
   width: 100%;
   padding: 24px;
   color: #292333;
   box-sizing: border-box;
 }
-
 /* =========================================================
    HEADER
-========================================================= */
-
+\========================================================= */
 .reviews-header {
   display: flex;
   align-items: center;
@@ -20,19 +17,16 @@
   gap: 16px;
   margin-bottom: 24px;
 }
-
 .reviews-header h1 {
   margin: 0 0 6px;
   font-size: 26px;
   font-weight: 700;
 }
-
 .reviews-header p {
   margin: 0;
   color: #77717f;
   font-size: 14px;
 }
-
 .reviews-refresh-button {
   padding: 10px 16px;
   border: 1px solid #f04d67;
@@ -42,29 +36,23 @@
   font-weight: 600;
   cursor: pointer;
 }
-
 .reviews-refresh-button:hover {
   background: #fff3f5;
 }
-
 .reviews-refresh-button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
-
 /* =========================================================
    SUMMARY CARDS
-========================================================= */
-
+\========================================================= */
 /* Reviews Summary Cards */
-
 .reviews-summary {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-bottom: 24px;
 }
-
 .reviews-summary-card {
   width: 240px;
   min-width: 240px;
@@ -75,32 +63,27 @@
   border-radius: 8px;
   background: #fff9fa;
 }
-
 .reviews-summary-card span {
   display: block;
   margin-bottom: 5px;
   color: #625965;
   font-size: 14px;
 }
-
 .reviews-summary-card strong {
   display: block;
   color: #292333;
   font-size: 28px;
   font-weight: 600;
 }
-
 /* =========================================================
    SEARCH AND FILTERS
-========================================================= */
-
+\========================================================= */
 .reviews-toolbar {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
 }
-
 .reviews-toolbar input,
 .reviews-toolbar select {
   min-height: 44px;
@@ -113,52 +96,43 @@
   font-size: 14px;
   outline: none;
 }
-
 .reviews-toolbar input {
   width: min(100%, 560px);
   flex: 1;
   min-width: 180px;
   box-sizing: border-box;
 }
-
 .reviews-toolbar select {
   min-width: 145px;
   cursor: pointer;
 }
-
 .reviews-toolbar input:focus,
 .reviews-toolbar select:focus {
   border-color: #f04d67;
   box-shadow: 0 0 0 3px rgb(240 77 103 / 10%);
 }
-
 /* =========================================================
    SUCCESS AND ERROR MESSAGES
-========================================================= */
-
+\========================================================= */
 .reviews-alert {
   margin-bottom: 16px;
   padding: 12px 14px;
   border-radius: 7px;
   font-size: 14px;
 }
-
 .reviews-alert-error {
   color: #a32335;
   background: #fff0f1;
   border: 1px solid #ffd5db;
 }
-
 .reviews-alert-success {
   color: #176b40;
   background: #eaf8ef;
   border: 1px solid #c9ecd6;
 }
-
 /* =========================================================
    REVIEWS TABLE
-========================================================= */
-
+\========================================================= */
 .reviews-table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -166,20 +140,17 @@
   border-radius: 9px;
   background: #fff;
 }
-
 .reviews-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
-
 .reviews-table th,
 .reviews-table td {
   padding: 15px 14px;
   border-bottom: 1px solid #eee8ed;
   vertical-align: top;
 }
-
 .reviews-table th {
   background: #fff8f9;
   color: #514653;
@@ -188,69 +159,56 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-
 .reviews-table td {
   color: #292333;
   font-size: 14px;
 }
-
 .reviews-table tbody tr:last-child td {
   border-bottom: none;
 }
-
 .reviews-table tbody tr:hover {
   background: #fffafb;
 }
-
 .reviews-product-name,
 .reviews-customer-name {
   font-weight: 600;
 }
-
 .reviews-customer-email {
   margin-top: 4px;
   color: #817987;
   font-size: 12px;
   overflow-wrap: anywhere;
 }
-
 .reviews-review-text {
   min-width: 180px;
   max-width: 320px;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
-
 /* =========================================================
    STAR RATINGS
-========================================================= */
-
+\========================================================= */
 .reviews-rating {
   display: flex;
   align-items: center;
   gap: 5px;
   white-space: nowrap;
 }
-
 .reviews-stars {
   color: #e4a329;
   letter-spacing: 1px;
 }
-
 .reviews-stars-empty {
   color: #ded9df;
 }
-
 .reviews-rating-number {
   color: #625965;
   font-size: 12px;
   white-space: nowrap;
 }
-
 /* =========================================================
    REPLY STATUS
-========================================================= */
-
+\========================================================= */
 .reviews-status {
   display: inline-block;
   padding: 6px 9px;
@@ -259,21 +217,17 @@
   font-weight: 600;
   white-space: nowrap;
 }
-
 .reviews-status-replied {
   color: #197342;
   background: #e6f6ec;
 }
-
 .reviews-status-pending {
   color: #9a6413;
   background: #fff3d9;
 }
-
 /* =========================================================
    REPLY BUTTONS
-========================================================= */
-
+\========================================================= */
 .reviews-reply-button {
   padding: 9px 15px;
   border: 1px solid #f04d67;
@@ -286,26 +240,21 @@
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease;
 }
-
 .reviews-reply-button:hover {
   background: #f04d67;
   color: #fff;
 }
-
 /* =========================================================
    EMPTY AND LOADING STATES
-========================================================= */
-
+\========================================================= */
 .reviews-empty {
   padding: 40px !important;
   color: #77717f !important;
   text-align: center;
 }
-
 /* =========================================================
    PAGINATION
-========================================================= */
-
+\========================================================= */
 .reviews-pagination {
   display: flex;
   align-items: center;
@@ -336,12 +285,10 @@
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-
 .reviews-pagination-controls .reviews-page-number {
   font-size: 15px;
   font-weight: 600;
 }
-
 .reviews-pagination-controls .reviews-page-number.active {
   border-color: #f04461;
   background: #f04461;
@@ -372,8 +319,7 @@
 
 /* =========================================================
    REPLY MODAL
-========================================================= */
-
+\========================================================= */
 .reviews-modal-overlay {
   position: fixed;
   inset: 0;
@@ -509,7 +455,6 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-
 .reviews-modal-form {
   display: flex;
   flex-direction: column;
@@ -531,19 +476,16 @@
   resize: vertical;
   outline: none;
 }
-
 .reviews-modal-form textarea:focus {
   border-color: #f04461;
   box-shadow: 0 0 0 3px rgb(240 68 97 / 10%);
 }
-
 .reviews-modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 12px;
 }
-
 .reviews-modal-cancel,
 .reviews-modal-save {
   min-width: 100px;
@@ -555,26 +497,21 @@
   font-weight: 600;
   cursor: pointer;
 }
-
 .reviews-modal-cancel {
   border-color: #ddd6df;
   background: #fff;
   color: #514653;
 }
-
 .reviews-modal-cancel:hover {
   background: #f8f5f8;
 }
-
 .reviews-modal-save {
   background: #f04461;
   color: #fff;
 }
-
 .reviews-modal-save:hover:not(:disabled) {
   background: #df3653;
 }
-
 .reviews-modal-cancel:disabled,
 .reviews-modal-save:disabled {
   opacity: 0.55;
@@ -582,69 +519,164 @@
 }
 
 /* =========================================================
-   RESPONSIVE LAYOUT
-========================================================= */
+   COMPACT TYPOGRAPHY — MATCH PRODUCTS PAGE
+   ========================================================= */
+
+.product-reviews-page {
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+.reviews-header {
+  margin-bottom: 20px;
+}
+
+.reviews-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.reviews-header p {
+  font-size: 12px;
+}
+
+.reviews-refresh-button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.reviews-summary {
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.reviews-summary-card {
+  width: 220px;
+  min-width: 220px;
+  min-height: 88px;
+  padding: 12px 20px;
+}
+
+.reviews-summary-card span {
+  font-size: 11px;
+}
+
+.reviews-summary-card strong {
+  font-size: 25px;
+}
+
+.reviews-toolbar {
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.reviews-toolbar input,
+.reviews-toolbar select {
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.reviews-alert {
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.reviews-table th,
+.reviews-table td {
+  padding: 12px 14px;
+}
+
+.reviews-table th {
+  font-size: 11px;
+}
+
+.reviews-table td {
+  font-size: 12px;
+}
+
+.reviews-customer-email,
+.reviews-rating-number {
+  font-size: 11px;
+}
+
+.reviews-status {
+  padding: 5px 8px;
+  font-size: 10px;
+}
+
+.reviews-reply-button {
+  padding: 7px 11px;
+  font-size: 10px;
+}
+
+.reviews-pagination {
+  margin-top: 18px;
+}
+
+.reviews-pagination-controls {
+  gap: 8px;
+}
+
+.reviews-pagination-controls button {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.reviews-pagination-controls .reviews-page-number {
+  font-size: 12px;
+}
+
+.reviews-pagination-controls .reviews-page-arrow {
+  font-size: 16px;
+}
+
+/* Modal typography and controls */
+.reviews-modal-header {
+  padding: 18px 20px;
+}
+
+.reviews-modal-header h2 {
+  font-size: 18px;
+}
+
+.reviews-modal-header p {
+  font-size: 12px;
+}
+
+.reviews-modal-body {
+  padding: 20px;
+}
+
+.reviews-modal-info strong {
+  font-size: 12px;
+}
+
+.reviews-modal-original p {
+  font-size: 12px;
+}
+
+.reviews-modal-form textarea {
+  font-size: 12px;
+}
+
+.reviews-modal-cancel,
+.reviews-modal-save {
+  min-width: 88px;
+  padding: 9px 14px;
+  font-size: 12px;
+}
 
 @media (max-width: 700px) {
   .product-reviews-page {
     padding: 14px;
   }
 
-  .reviews-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .reviews-toolbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .reviews-toolbar input,
-  .reviews-toolbar select {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
   .reviews-summary-card {
-    flex: 1;
     min-width: 120px;
-  }
-
-  .reviews-pagination {
-    justify-content: center;
-  }
-
-  .reviews-pagination-controls {
-    gap: 8px;
-  }
-
-  .reviews-pagination-controls button {
-    width: 38px;
-    height: 38px;
-  }
-}
-
-@media (max-width: 520px) {
-  .reviews-modal-overlay {
+    width: auto;
     padding: 12px;
-  }
-
-  .reviews-modal {
-    max-height: calc(100vh - 24px);
-  }
-
-  .reviews-modal-header,
-  .reviews-modal-body {
-    padding: 18px;
-  }
-
-  .reviews-modal-info {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
-
-  .reviews-modal-footer button {
-    flex: 1;
   }
 }
