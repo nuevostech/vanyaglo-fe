@@ -600,3 +600,39 @@
   border-color: #ed4f68;
   color: #ed4f68;
 }
+.export-excel-btn {
+  white-space: nowrap;
+  min-height: 42px;
+}
+
+.orders-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.orders-toolbar input {
+  flex: 1;
+  min-width: 0;
+}
+
+.orders-toolbar select {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .orders-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .orders-toolbar input,
+  .orders-toolbar select {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .export-excel-btn {
+    width: 100%;
+  }
+}
