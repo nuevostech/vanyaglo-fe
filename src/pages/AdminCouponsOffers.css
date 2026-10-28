@@ -671,3 +671,18 @@
   height: 32px;
   font-size: 22px;
 }
+
+.status-badge.expired {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-badge.upcoming {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.limit-reached {
+  background: #ffedd5;
+  color: #9a3412;
+}

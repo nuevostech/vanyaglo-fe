@@ -1,5 +1,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import * as XLSX from "xlsx";
 import {
   getAllOrders,
   updateOrderStatus,
@@ -297,6 +298,36 @@ export default function AdminOrders() {
       estimated_delivery: tracking.estimated_delivery || null,
     });
   };
+  
+  // Export filtered orders to Excel
+  const handleExportExcel = () => {
+    if (filteredOrders.length === 0) {
+      window.alert("No orders available to export.");
+      return;
+    }
+
+    const exportData = filteredOrders.map((order) => ({
+      "Order ID": order.order_id || "",
+      "Customer Name": getCustomerName(order),
+      "Customer ID": order.user_id || "Guest",
+      "Order Date": formatDate(order.created_at),
+      "Items": (order.items || []).length,
+      "Total Amount": Number(order.total_amount || 0),
+      "Payment Status": titleCase(order.payment_status || "unknown"),
+      "Order Status": titleCase(order.status || "unknown"),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Orders");
+
+    XLSX.writeFile(
+      workbook,
+      "VanyaGlo_Orders.xlsx"
+    );
+  };
+
 
   return (
     <main className="orders-page">
@@ -373,6 +404,14 @@ export default function AdminOrders() {
             </option>
           ))}
         </select>
+        <button
+          type="button"
+          className="order-btn primary export-excel-btn"
+          onClick={handleExportExcel}
+          disabled={loading || filteredOrders.length === 0}
+        >
+          Export to Excel
+        </button>
       </section>
 
       {/* Orders table */}
@@ -780,5 +819,3 @@ function StatusBadge({ status }) {
     </span>
   );
 }
-
-

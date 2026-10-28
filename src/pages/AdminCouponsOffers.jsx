@@ -71,10 +71,39 @@ function money(value) {
   return `₹${Number(value || 0).toLocaleString("en-IN")}`;
 }
 
-function StatusBadge({ active }) {
+function getCouponStatus(coupon) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const startDate = coupon.startDate
+    ? new Date(`${coupon.startDate.slice(0, 10)}T00:00:00`)
+    : null;
+
+  const endDate = coupon.endDate
+    ? new Date(`${coupon.endDate.slice(0, 10)}T00:00:00`)
+    : null;
+
+  if (endDate && today > endDate) return "Expired";
+  if (!coupon.active) return "Inactive";
+  if (startDate && today < startDate) return "Upcoming";
+
+  if (
+    coupon.usageLimit !== "" &&
+    coupon.usageLimit != null &&
+    Number(coupon.usage) >= Number(coupon.usageLimit)
+  ) {
+    return "Limit Reached";
+  }
+
+  return "Active";
+}
+
+function StatusBadge({ status }) {
+  const className = status.toLowerCase().replace(/\s+/g, "-");
+
   return (
-    <span className={`status-badge ${active ? "active" : "inactive"}`}>
-      {active ? "Active" : "Inactive"}
+    <span className={`status-badge ${className}`}>
+      {status}
     </span>
   );
 }
@@ -388,10 +417,12 @@ useEffect(() => {
           String(value || "").toLowerCase().includes(query)
         );
 
-      const matchesStatus =
-        couponStatus === "all" ||
-        (couponStatus === "active" && coupon.active) ||
-        (couponStatus === "inactive" && !coupon.active);
+      const status = getCouponStatus(coupon);
+
+const matchesStatus =
+  couponStatus === "all" ||
+  (couponStatus === "active" && status === "Active") ||
+  (couponStatus === "inactive" && status === "Inactive");
 
       const matchesType =
         couponType === "all" || coupon.discountType === couponType;
@@ -572,7 +603,9 @@ useEffect(() => {
     }
   }
 
-  const activeCoupons = coupons.filter((item) => item.active).length;
+  const activeCoupons = coupons.filter(
+  (item) => getCouponStatus(item) === "Active"
+).length;
   const activeOffers = offers.filter((item) => item.active).length;
 
   return (
@@ -790,9 +823,9 @@ useEffect(() => {
                         className="status-action"
                         onClick={() => toggleCoupon(coupon)}
                         title="Click to toggle status"
-                        disabled={loading}
+                        disabled={loading || getCouponStatus(coupon) !== "Active"}
                       >
-                        <StatusBadge active={coupon.active} />
+                        <StatusBadge status={getCouponStatus(coupon)} />
                       </button>
                     </td>
                     <td>
