@@ -10,30 +10,46 @@ import {
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminOrders from "./pages/AdminOrders";
 import AdminCouponsOffers from "./pages/AdminCouponsOffers";
+import AdminLogin from "./pages/AdminLogin";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Existing admin dashboard */}
+        {/* Show React Admin Login first */}
         <Route
-          path="/admin"
-          element={<AdminDashboard />}
+          path="/"
+          element={<Navigate to="/admin/login" replace />}
         />
 
-        {/* New orders management page */}
         <Route
-          path="/admin/orders"
-          element={<AdminOrders />}
+          path="/admin/login"
+          element={<AdminLogin />}
         />
-        <Route
-  path="/admin/coupons-offers"
-  element={<AdminCouponsOffers />}
-/>
 
-        {/* Redirect unknown routes */}
+        {/* Dashboard pages require authentication */}
+        <Route element={<ProtectedAdminRoute />}>
+          <Route
+            path="/admin"
+            element={<AdminDashboard />}
+          />
+
+          <Route
+            path="/admin/orders"
+            element={<AdminOrders />}
+          />
+
+          <Route
+            path="/admin/coupons-offers"
+            element={<AdminCouponsOffers />}
+          />
+        </Route>
+
+        {/* Unknown routes return to login */}
         <Route
           path="*"
-          element={<Navigate to="/admin" replace />}
+          element={<Navigate to="/admin/login" replace />}
         />
       </Routes>
     </BrowserRouter>
