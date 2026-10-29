@@ -63,79 +63,27 @@ const [addProductForm, setAddProductForm] = useState({
 
 });
 
-  useEffect(() => {
+  
+useEffect(() => {
+  const token =
+    localStorage.getItem("admin_access_token") ||
+    localStorage.getItem("token") ||
+    localStorage.getItem("accessToken");
 
-  const loginAdmin = async () => {
+  if (!token) {
+    console.error("Admin access token not found. Please log in first.");
+    return;
+  }
 
-    try {
-
-      const response = await fetch(
-
-        `${API_BASE_URL}/api/admin/dev-login`,
-
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "Content-Type": "application/json",
-
-          },
-
-        }
-
-      );
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-
-        throw new Error(
-
-          result.message || "Admin auto-login failed"
-
-        );
-
-      }
-
-      const accessToken =
-
-        result.data?.access_token ||
-
-        result.data?.accessToken;
-
-      if (!accessToken) {
-
-        throw new Error("Admin access token not received");
-
-      }
-
-      localStorage.setItem("token", accessToken);
-
-      localStorage.setItem("accessToken", accessToken);
-
-      console.log("Admin auto-login successful");
-
-    } catch (error) {
-
-      console.error("Admin auto-login error:", error);
-
-    }
-
-  };
-
-  loginAdmin().then(async () => {
-    await Promise.allSettled([
-      fetchDashboardUsers(),
-      fetchDashboardProducts(),
-      fetchDashboardReviews(),
-      fetchDashboardOrders(),
-      fetchDashboardCouponOfferCounts(),
-    ]);
-  });
-
+  Promise.allSettled([
+    fetchDashboardUsers(),
+    fetchDashboardProducts(),
+    fetchDashboardReviews(),
+    fetchDashboardOrders(),
+    fetchDashboardCouponOfferCounts(),
+  ]);
 }, []);
+
 
   const [dashboardStats, setDashboardStats] = useState({
   revenue: "00",
@@ -184,18 +132,50 @@ const stats = [
 
 const getDashboardList = (result, key) => {
   const data = result?.data ?? result ?? {};
-  const list = data?.[key] ?? data?.rows ?? data?.items ?? data?.results;
-  return Array.isArray(list) ? list : Array.isArray(data) ? data : [];
+
+  const list =
+    data?.[key] ??
+    data?.rows ??
+    data?.items ??
+    data?.results ??
+    data?.data?.[key] ??
+    data?.data?.rows;
+
+  return Array.isArray(list)
+    ? list
+    : Array.isArray(data)
+      ? data
+      : Array.isArray(data?.data)
+        ? data.data
+        : [];
 };
 
 const getDashboardTotal = (result, key) => {
   const data = result?.data ?? result ?? {};
-  const directTotal = data?.pagination?.total ?? data?.statistics?.total ?? data?.stats?.total ?? data?.total;
-  if (directTotal !== undefined && directTotal !== null) return Number(directTotal) || 0;
-  const list = getDashboardList(result, key);
-  return list.length;
-};
 
+  const candidates = [
+    data?.pagination?.total,
+    data?.pagination?.totalItems,
+    data?.statistics?.total,
+    data?.stats?.total,
+    data?.total,
+    result?.pagination?.total,
+    result?.statistics?.total,
+    result?.total,
+  ];
+
+  for (const value of candidates) {
+    if (
+      value !== undefined &&
+      value !== null &&
+      Number.isFinite(Number(value))
+    ) {
+      return Number(value);
+    }
+  }
+
+  return getDashboardList(result, key).length;
+};
 const fetchDashboardOrders = async () => {
   try {
     const token = localStorage.getItem("token") || localStorage.getItem("accessToken") || localStorage.getItem("adminToken");
@@ -415,83 +395,53 @@ setRecentUsersPage(1);
   }
 
 };
-
 const fetchDashboardProducts = async () => {
-
   try {
-
     const token =
-
+      localStorage.getItem("admin_access_token") ||
       localStorage.getItem("token") ||
-
-      localStorage.getItem("accessToken");
+      localStorage.getItem("accessToken") ||
+      localStorage.getItem("access_token");
 
     if (!token) {
-
       console.error("Admin token not found");
-
       return;
-
     }
 
     const response = await fetch(
-
-      `${API_BASE_URL}/api/admin/products?page=1&limit=1`,
-
+      `${API_BASE_URL}/api/admin/products?page=1&limit=1000`,
       {
-
         method: "GET",
-
         headers: {
-
-          "Content-Type": "application/json",
-
+          Accept: "application/json",
           Authorization: `Bearer ${token}`,
-
         },
-
       }
-
     );
 
     const result = await response.json();
 
     console.log("Dashboard products response:", result);
 
-    if (!response.ok) {
-
+    if (!response.ok || result.success === false) {
       throw new Error(
-
         result.message || "Failed to fetch dashboard products"
-
       );
-
     }
 
-    const totalProducts =
-
-      result?.data?.pagination?.total ??
-
-      result?.pagination?.total ??
-
-      0;
+    const totalProducts = getDashboardTotal(
+      result,
+      "products"
+    );
 
     setDashboardStats((prev) => ({
-
       ...prev,
-
       products: String(totalProducts).padStart(2, "0"),
-
     }));
-
   } catch (error) {
-
     console.error("Dashboard products error:", error);
-
   }
-
 };
-
 const fetchDashboardReviews = async () => {
   try {
     const token =

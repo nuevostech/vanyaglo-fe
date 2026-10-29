@@ -56,16 +56,27 @@ export default function AdminLogin() {
         throw new Error("Invalid admin login response.");
       }
 
-      localStorage.setItem(
-        "admin_access_token",
-        data.access_token
-      );
+      
+localStorage.setItem(
+  "admin_access_token",
+  data.access_token
+);
 
-      localStorage.setItem(
-        "admin_user",
-        JSON.stringify(data.user)
-      );
+localStorage.setItem(
+  "token",
+  data.access_token
+);
 
+localStorage.setItem(
+  "accessToken",
+  data.access_token
+);
+
+localStorage.setItem(
+  "admin_user",
+  JSON.stringify(data.user)
+);
+navigate("/admin", { replace: true });
       navigate("/admin", { replace: true });
     } catch (err) {
       setError(
