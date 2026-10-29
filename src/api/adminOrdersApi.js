@@ -1,7 +1,12 @@
 
 // src/api/adminOrdersApi.js
 
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://localhost:3000"
+).replace(/\/+$/, "");
+
+const API_PREFIX = "/api";
 
 const getAuthHeaders = () => {
   const token =
@@ -22,13 +27,16 @@ const getAuthHeaders = () => {
 };
 
 const request = async (url, options = {}) => {
-  const response = await fetch(`${API_BASE_URL}${url}`, {
-    ...options,
-    headers: {
-      ...getAuthHeaders(),
-      ...options.headers,
-    },
-  });
+  const response = await fetch(
+    `${API_BASE_URL}${API_PREFIX}${url}`,
+    {
+      ...options,
+      headers: {
+        ...getAuthHeaders(),
+        ...options.headers,
+      },
+    }
+  );
 
   const result = await response.json();
 
@@ -41,13 +49,11 @@ const request = async (url, options = {}) => {
   return result;
 };
 
-
 export const getAllOrders = async ({
   search = "",
   status = "all",
 } = {}) => {
   const params = new URLSearchParams();
-
   const query = search.trim();
 
   if (query.length >= 3) {
@@ -59,6 +65,7 @@ export const getAllOrders = async ({
   }
 
   const queryString = params.toString();
+
   const endpoint = queryString
     ? `/orders/admin/all?${queryString}`
     : "/orders/admin/all";
@@ -67,7 +74,6 @@ export const getAllOrders = async ({
 
   return result.data?.orders ?? [];
 };
-
 
 export const updateOrderStatus = async (
   orderId,
