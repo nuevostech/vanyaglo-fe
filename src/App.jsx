@@ -12,7 +12,7 @@ import AdminOrders from "./pages/AdminOrders";
 import AdminCouponsOffers from "./pages/AdminCouponsOffers";
 import AdminLogin from "./pages/AdminLogin";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +44,10 @@ function App() {
             path="/admin/coupons-offers"
             element={<AdminCouponsOffers />}
           />
+          <Route
+  path="/privacy-policy"
+  element={<PrivacyPolicy />}
+/>
         </Route>
 
         {/* Unknown routes return to login */}
