@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import * as XLSX from "xlsx";
 import {
   getAllOrders,
+  refundOrder as refundOrderRequest,
   updateOrderStatus,
 } from "../api/adminOrdersApi";
 import "./AdminOrders.css";
@@ -62,6 +63,107 @@ const getProductName = (item) =>
   item.name ||
   "Product";
 
+const getRefundDestination = (order) => {
+  const request =
+    order.refund_request ||
+    order.refundRequest ||
+    order.cancellation_request ||
+    order.cancellationRequest ||
+    {};
+
+  const destination = normalizeStatus(
+    order.refund_method ||
+      order.refund_destination ||
+      order.customer_selected_destination ||
+      order.refund_preference ||
+      order.refund_option ||
+      order.refundMethod ||
+      order.refundOption ||
+      request.refund_method ||
+      request.refund_destination ||
+      request.refund_preference ||
+      request.refund_option ||
+      request.refundMethod ||
+      request.refundOption ||
+      request.destination
+  ).replace(/[\s-]+/g, "_");
+
+  if (
+    ["wallet", "vanyaglo_wallet", "e_wallet", "ewallet"].includes(
+      destination
+    )
+  ) {
+    return {
+      value: "wallet",
+      label: "VanyaGlo Wallet",
+    };
+  }
+
+  if (
+    [
+      "original",
+      "original_payment",
+      "original_payment_method",
+      "payment_method",
+    ].includes(destination)
+  ) {
+    return {
+      value: "original",
+      label: "Original Payment Method",
+    };
+  }
+
+  return null;
+};
+
+const getCancellationReason = (order) =>
+  order.cancellation_request?.reason ||
+  order.cancellation_request?.cancellation_reason ||
+  order.cancellationRequest?.reason ||
+  order.refund_request?.cancellation_reason ||
+  order.cancellation_reason ||
+  order.cancel_reason ||
+  order.cancellationReason ||
+  "";
+
+const getRefundAmount = (order) =>
+  order.refund_amount ??
+  order.refundAmount ??
+  order.refund_request?.refund_amount ??
+  order.refundRequest?.refundAmount ??
+  order.cancellation_request?.refund_amount ??
+  order.total_amount;
+
+const getRefundReason = (order) =>
+  order.refund_reason ||
+  order.refundReason ||
+  order.refund_request?.reason ||
+  order.refund_request?.refund_reason ||
+  "";
+
+const getRefundStatus = (order) =>
+  order.refund_status ||
+  order.refundStatus ||
+  order.refund_request?.status ||
+  order.cancellation_request?.refund_status ||
+  order.cancellation_request?.status ||
+  order.refundRequest?.status ||
+  "";
+
+const getRefundRequestedAt = (order) =>
+  order.refund_requested_at ||
+  order.refundRequestedAt ||
+  order.refund_request?.requested_at ||
+  order.refund_request?.created_at ||
+  order.cancellation_request?.requested_at ||
+  order.cancellation_request?.created_at ||
+  "";
+
+const isRefundInProgressOrComplete = (order) =>
+  ["processing", "processed", "completed", "refunded", "success"].includes(
+    normalizeStatus(getRefundStatus(order)).replace(/[\s-]+/g, "_")
+  );
+
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
 
@@ -74,6 +176,8 @@ export default function AdminOrders() {
   const [error, setError] = useState("");
   const [savingId, setSavingId] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [refundOrder, setRefundOrder] = useState(null);
+  const [refundReason, setRefundReason] = useState("");
   const [notice, setNotice] = useState("");
 
   const [tracking, setTracking] = useState({
@@ -212,6 +316,69 @@ export default function AdminOrders() {
 
   const closeOrderDetails = () => {
     setSelectedOrder(null);
+  };
+
+  const openRefundDetails = (order) => {
+    setRefundOrder(order);
+    setRefundReason(getCancellationReason(order));
+    setError("");
+  };
+
+  const closeRefundDetails = () => {
+    setRefundOrder(null);
+    setRefundReason("");
+  };
+
+  const processRefund = async (event) => {
+    event.preventDefault();
+
+    if (
+      !refundOrder ||
+      !refundReason.trim() ||
+      isRefundInProgressOrComplete(refundOrder)
+    ) return;
+
+    const refundDestination = getRefundDestination(refundOrder);
+
+    if (!refundDestination) {
+      setError(
+        "This order has no customer-selected refund destination. Refresh the order details before processing."
+      );
+      return;
+    }
+
+    if (refundDestination.value === "wallet") {
+      setError(
+        "Wallet refunds are not supported by the configured refund endpoint."
+      );
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Process a refund of ${formatCurrency(getRefundAmount(refundOrder))} to ${refundDestination.label} for order ${refundOrder.order_id}?`
+    );
+
+    if (!confirmed) return;
+
+    const orderId = refundOrder.order_id;
+    setSavingId(orderId);
+    setError("");
+    setNotice("");
+
+    try {
+      const result = await refundOrderRequest({
+        order_id: orderId,
+        amount: Number(getRefundAmount(refundOrder)),
+        reason: refundReason.trim(),
+      });
+      closeRefundDetails();
+      setNotice(result.message || "Refund request submitted successfully.");
+      await loadOrders();
+    } catch (err) {
+      setError(err.message || "Failed to process refund.");
+    } finally {
+      setSavingId(null);
+    }
   };
 
   const openTracking = (order) => {
@@ -486,6 +653,18 @@ export default function AdminOrders() {
                         >
                           View Details
                         </button>
+
+                        {status === "cancelled" &&
+                          normalizeStatus(order.payment_status) === "paid" &&
+                          !isRefundInProgressOrComplete(order) && (
+                            <button
+                              type="button"
+                              className="order-btn outline"
+                              onClick={() => openRefundDetails(order)}
+                            >
+                              Refund
+                            </button>
+                          )}
 
                         {status === "pending" && (
                           <button
@@ -794,6 +973,141 @@ export default function AdminOrders() {
                 Close
               </button>
             )}
+          </section>
+        </div>
+      )}
+
+      {refundOrder && (
+        <div
+          className="orders-modal-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeRefundDetails();
+            }
+          }}
+        >
+          <section
+            className="orders-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="refund-modal-title"
+          >
+            <header className="orders-modal-header">
+              <div>
+                <h2 id="refund-modal-title">Refund Details</h2>
+                <p>{refundOrder.order_id}</p>
+              </div>
+
+              <button
+                type="button"
+                className="orders-modal-close"
+                onClick={closeRefundDetails}
+                aria-label="Close refund details"
+              >
+                ×
+              </button>
+            </header>
+
+            <div className="order-customer-details refund-details">
+              <p>
+                <strong>Customer:</strong> {getCustomerName(refundOrder)}
+              </p>
+              <p>
+                <strong>Order status:</strong>{" "}
+                {titleCase(refundOrder.status)}
+              </p>
+              <p>
+                <strong>Payment status:</strong>{" "}
+                {titleCase(refundOrder.payment_status)}
+              </p>
+              <p>
+                <strong>Refund amount:</strong>{" "}
+                {formatCurrency(getRefundAmount(refundOrder))}
+              </p>
+              <p>
+                <strong>Customer-selected destination:</strong>{" "}
+                {getRefundDestination(refundOrder)?.label ||
+                  "Not provided by the order"}
+              </p>
+              <p>
+                <strong>Cancellation reason:</strong>{" "}
+                {getCancellationReason(refundOrder) || "Not provided"}
+              </p>
+              {getRefundStatus(refundOrder) && (
+                <p>
+                  <strong>Refund status:</strong>{" "}
+                  {titleCase(getRefundStatus(refundOrder))}
+                </p>
+              )}
+              {getRefundReason(refundOrder) && (
+                <p>
+                  <strong>Refund reason:</strong>{" "}
+                  {getRefundReason(refundOrder)}
+                </p>
+              )}
+              {getRefundRequestedAt(refundOrder) && (
+                <p>
+                  <strong>Request date:</strong>{" "}
+                  {formatDate(getRefundRequestedAt(refundOrder))}
+                </p>
+              )}
+              {refundOrder.payment_method && (
+                <p>
+                  <strong>Payment method:</strong>{" "}
+                  {titleCase(refundOrder.payment_method)}
+                </p>
+              )}
+              {refundOrder.payment_id && (
+                <p>
+                  <strong>Payment reference:</strong> {refundOrder.payment_id}
+                </p>
+              )}
+            </div>
+
+            {!getRefundDestination(refundOrder) && (
+              <p className="refund-warning" role="alert">
+                The customer refund option was not included in the order
+                response. The backend must return the saved refund method
+                before this refund can be processed.
+              </p>
+            )}
+
+            {getRefundDestination(refundOrder)?.value === "wallet" && (
+              <p className="refund-warning" role="alert">
+                The customer selected VanyaGlo Wallet. The current refund API
+                only supports the original payment method, so wallet processing
+                must be implemented by the backend.
+              </p>
+            )}
+
+            <form onSubmit={processRefund}>
+              <label className="refund-reason">
+                Admin processing reason *
+                <textarea
+                  value={refundReason}
+                  onChange={(event) => setRefundReason(event.target.value)}
+                  required
+                  rows={3}
+                  placeholder="Enter the reason for processing this refund"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="order-btn primary full-width"
+                disabled={
+                  savingId === refundOrder.order_id ||
+                  !getRefundDestination(refundOrder) ||
+                  isRefundInProgressOrComplete(refundOrder) ||
+                  !refundReason.trim() ||
+                  getRefundDestination(refundOrder)?.value === "wallet"
+                }
+              >
+                {savingId === refundOrder.order_id
+                  ? "Processing Refund..."
+                  : "Process Refund"}
+              </button>
+            </form>
           </section>
         </div>
       )}

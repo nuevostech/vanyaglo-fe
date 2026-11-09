@@ -87,3 +87,10 @@ export const updateOrderStatus = async (
     }
   );
 };
+
+export const refundOrder = async (payload) => {
+  return request("/payments/refund", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+};
